@@ -139,6 +139,10 @@ class DFRobot_Environmental_Sensor():
       elif self._uart_i2c == UART_MODE:
         data = rbuf[0]
       outputVoltage = 3.0 * data/1024
+      if outputVoltage <= 0.99:
+        outputVoltage = 0.99
+      elif outputVoltage>=2.99:
+        outputVoltage = 2.99
       ultraviolet = (outputVoltage - 0.99) * (15.0 - 0.0) / (2.9 - 0.99) + 0.0 
     return round(ultraviolet,2)
       
